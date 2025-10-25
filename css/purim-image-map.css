@@ -1,0 +1,105 @@
+.purim-image-map {
+    position: relative;
+    width: 100%;
+}
+
+.purim-image-map__inner {
+    --purim-map-ratio: 56.25%;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.purim-image-map__inner::before {
+    content: "";
+    display: block;
+    padding-bottom: var(--purim-map-ratio);
+}
+
+.purim-image-map__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.purim-image-hotspot {
+    position: absolute;
+    top: var(--purim-hotspot-top);
+    left: var(--purim-hotspot-left);
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: rgba(38, 63, 146, 0.9);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+    padding: 0;
+    z-index: 2;
+}
+
+.purim-image-hotspot:hover,
+.purim-image-hotspot:focus-visible {
+    transform: translate(-50%, -50%) scale(1.08);
+    background: rgba(38, 63, 146, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.purim-image-hotspot:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 2px;
+}
+
+.purim-image-hotspot__inner {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: currentColor;
+    position: relative;
+}
+
+.purim-image-hotspot__inner::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0.6;
+    animation: purim-image-hotspot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes purim-image-hotspot-pulse {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.45;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0.6);
+        opacity: 0.45;
+    }
+}
+
+@media (max-width: 768px) {
+    .purim-image-hotspot {
+        width: 26px;
+        height: 26px;
+    }
+
+    .purim-image-hotspot__inner::after {
+        inset: -4px;
+    }
+}
